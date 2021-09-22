@@ -98,5 +98,5 @@ app.get('*', (req, res) => {
 
 app.listen(port, function () {
     console.log(`Server is running at:`);
-    console.log(`http://localhost` `:` + port);
+    console.log("http://localhost" + port);
 });
