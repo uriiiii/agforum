@@ -1,6 +1,7 @@
 {
   "name": "ag_forumapp",
   "version": "1.0.0",
+  "description": "Weird",
   "main": "index.js",
   "engines": {
     "node": "16.7.0",
@@ -32,8 +33,8 @@
     "passport-local-mongoose": "^6.1.0",
     "dotenv": "^10.0.0"
   },
-  "description": "",
+  
   "devDependencies": {
-    
+    "nodemon": "^2.0.12"
   }
 }
