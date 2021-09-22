@@ -10,8 +10,9 @@ const MongoStore = require('connect-mongo');
 const db = require(`./models/db.js`);
 
 dotenv.config();
-port = process.env.PORT || 3000;
+port = process.env.PORT;
 url = process.env.URI;
+hostname = process.env.HOSTNAME;
 secret = process.env.SECRET;
 
 db.connect();
@@ -96,7 +97,7 @@ app.get('*', (req, res) => {
 	res.render('404');
 });
 
-app.listen(port, function () {
+app.listen(port, hostname, function () {
     console.log(`Server is running at:`);
-    console.log("http://localhost" + port);
+    console.log(`http://` + hostname + `:` + port);
 });
