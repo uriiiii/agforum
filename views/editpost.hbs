@@ -1,0 +1,30 @@
+<section class="page-section" id="contact">
+            <div class="container bg-light">
+            <br><br>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Edit Post <a href="/commBoard"><i class="far fa-times-circle"></i></a></h2><br>
+                {{> messages}}
+                <!-- Form-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+
+                        <form action="/editpost/{{post._id}}" method="POST" enctype="multipart/form-data">
+                            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="text" name="title" class="form-control" id="title" value="{{post.headline}}" required/>
+                                <label for="content">Hedline:</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="text" name="content" class="form-control" id="posts" value="{{post.info}}" required/>
+                                <label for="content">Info:</label>
+                            </div>
+
+                            <!-- Submit Button-->
+                            <button class="btn btn-primary btn-xl" type="submit" value="submit">Edit Post</button>
+
+                        </form>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </section>

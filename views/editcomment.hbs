@@ -1,0 +1,33 @@
+<h6>{{post.headline}}</h6>
+<h6>{{post.info}}</h6>
+
+
+
+ <section class="page-section" id="contact">
+            <div class="container bg-light">
+            <br><br>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Edit Comment<a href="/commBoard"><i class="far fa-times-circle"></i></a></h2>
+                <br>
+                {{> messages}}
+                <!-- Form-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+
+                        <form action="/editcomment/{{comment._id}}" method="POST" enctype="multipart/form-data">
+                            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                
+                                <input class="form-control" type="text" name="content" class="form-control" id="comms"value="{{comment.info}}">
+                            <label for="content">Reply:</label>
+                            
+                            </div>
+
+                            <!-- Submit Button-->
+                            <button class="btn btn-primary btn-xl" type="submit" value="submit">Edit Comment</button>
+
+                        </form>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </section>

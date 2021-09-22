@@ -1,0 +1,15 @@
+{{#if error_msg}}
+<div class="row justify-content-center">
+  <div class="card bg-danger">
+    <h6 class="text-white text-uppercase text-center my-3" style="font-size:26px;"><strong>{{error_msg}}</strong></h6>
+  </div>
+</div>
+{{/if}}
+
+{{#if success_msg}}
+<div class="row">
+  <div class="card bg-success">
+    <h6 class="text-white text-uppercase text-center my-3"><strong>{{success_msg}}</strong></h6>
+  </div>
+</div>
+{{/if}}

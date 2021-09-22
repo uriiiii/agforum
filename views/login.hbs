@@ -1,0 +1,56 @@
+<style>
+  body{
+
+    background-image: url("/images/loginbg.jpg");
+    height: 100%;
+    background-size: contain;
+    background-size: cover;
+  }
+</style>
+    <section class="page-section" id="contact">
+
+    <div class="container bg-light">
+    <br><br>
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">LOGIN</h2>
+                
+
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
+             
+               
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+
+        {{> messages}}
+
+        <form class="was-validated" action="/user/login" method="POST">
+                           
+        <div class="form-floating mb-3">
+        <input class="form-control" type="text" placeholder="Enter username" name="username" required="" />
+        <label for="name">Username</label>
+        <div class="invalid-feedback" >Username is required.</div>
+        </div>
+
+                             <div class="form-floating mb-3">
+                                <input class="form-control" type="password" placeholder="Enter password" name="password" required="" />
+                                <label for="name">Password</label>
+                                <div class="invalid-feedback" >Password is required.</div>
+                            </div>
+                            
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            <!-- Submit Button-->
+                            <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary btn-xl align-center" id="submitButton" type="submit">Login</button>
+                            </div><br><br>
+                            <p class="text-center">Dont have an account?<a href="/user/register"> Sign Up</a></p><br />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        

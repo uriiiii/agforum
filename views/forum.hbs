@@ -1,0 +1,215 @@
+<style>
+  body{
+
+    background-image: url("/images/bg.jpg");
+    height: 100%;
+    background-size: contain;
+    background-size: cover;
+  }
+</style>
+
+{{>nav}}
+<body>
+<section class ="marginput">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>COMMISION BOARD: {{forumName}}</h2>
+      <h3>{{forumDescription}}</h3>
+    </div>
+
+  <div class="row">
+    <div class="col-lg-8" >
+      <div class="card">
+      {{#unless isSearch}}
+      <form action="/createpost" class="m-2" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+      <label for="title">Headline</label>
+      <input type="text" name="title" id="content" class="form-control my-2" placeholder="Enter Post Here" required>
+      <label for="title">Information</label>
+      <input type="text" name="content" id="content" class="form-control my-2" placeholder="Enter Post Here" required>
+      <label for="title">City</label><br>
+      <div class="btn-group">
+      <input type="radio" class="btn-check" name="city" id="Mondstadt" autocomplete="off" value="Mondstadt"checked/>
+      <label class="btn btn-primary" for="Mondstadt">Mondstadt</label>
+      <input type="radio" class="btn-check" name="city" id="Liyue" value="Liyue" autocomplete="off" />
+      <label class="btn btn-primary" for="Liyue">Liyue</label>
+      <input type="radio" class="btn-check" name="city" id="Inazuma" value="Inazuma" autocomplete="off" />
+      <label class="btn btn-primary" for="Inazuma">Inazuma</label>
+      </div><br>
+      <label for="title">Image</label>
+      <input type="file" class="form-control" name="image" id="image">
+      <button type="submit" class="btn btn-primary w-25 p-2 mt-3 mb-2"><strong>Submit</strong></button>
+      </div>
+    </form>
+  {{/unless}}
+  </div>
+  <div class="resume-item pb-0">
+  {{#if posts}}
+  {{#each posts }}
+    <div class="card">
+      <div class="card-body d-flex flex-column" data-post-id="{{this._id}}">
+        <div class="d-flex">
+          {{#if profilePicture}}
+           <img src="data:{{this.profilePicture.contentType}};base64,{{this.profilePicture.data}}" class="rounded-circle mt-1 mx-2" alt="profile" style="width: 55px; height: 55px;"srcset="">  
+          {{else}}
+            <img src="/images/default.png" class="rounded-circle mt-1 mx-2" alt="default" style="width: 55px; height: 55px;"srcset="">
+          {{/if}}
+          <div>
+            <div class="d-flex flex-row"> 
+            <h2 class="my-0">{{this.headline}}</h2>
+            {{#if this.isOwned}}
+            <form action="/editpost/{{this._id}}" method="GET">
+            <button type="submit" class="btn btn-link"><i class="far fa-edit"></i></button> 
+            </form>
+            <form action="/post/{{this._id}}" method="POST">
+            <button type="submit" class="btn btn-link"><i class="fas fa-trash-alt"></i></button> 
+            </form>
+            {{else}}
+            
+            {{/if}} 
+            </div>
+            <p class="my-0 text-muted">commisioned by: <a href="/viewProfile/{{this.username}}">{{this.username}}</a></p>
+            <small class="text-muted">{{this.date}}</small>
+            
+            <p class="mt-2">{{this.info}}</p>
+            <img src="data:{{this.image.contentType}};base64,{{this.image.data}}" style="height: auto; width: 30%;" class="rounded mx-auto" alt="" srcset="">
+          </div>
+        </div>  
+         
+
+        <div class="d-flex">
+
+          {{#if isLiked}}
+            <form action="/delete-reaction/{{this._id}}" method="POST">
+              <button type="submit" class="btn btn-link" style="margin-top: 2px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#ebcc34" class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+              </button>
+            </form>
+          {{else}} 
+
+            <form action="/insert-reaction/{{this._id}}" method="POST">
+              <button type="submit" class="btn btn-link" style="margin-top: 2px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#B8B8B8" class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+              </button>
+            </form>
+          {{/if}}
+
+        <small class="align-self-center">{{this.Rewards}}</small>
+
+      
+        </div>
+        <ul class="list-group mt-2">
+          {{#each this.comments}}
+              <li class="list-group-item" data-comment-id="{{this._id}}">
+                <div class="d-flex">
+               
+          {{#if this.profilePicture.data}}
+           <img src="data:{{this.profilePicture.contentType}};base64,{{this.profilePicture.data}}" class="rounded-circle mt-1 mx-2" alt="profile" style="width: 55px; height: 55px;"srcset="">  
+          {{else}}
+            <img src="/images/default.png" class="rounded-circle mt-1 mx-2" alt="default" style="width: 55px; height: 55px;"srcset="">
+          {{/if}}
+            
+            
+            
+            <div>
+            <div class="d-flex flex-row"> 
+            <p class="my-2 text-muted">reply by: <a href="">{{this.username}}</a></p>
+            {{#if this.isOwned}}
+            <form action="/editcomment/{{this._id}}" method="GET">
+            
+            <button type="submit" class="btn btn-link"><i class="far fa-edit"></i></button> 
+            </form>
+            <form action="/comment/{{this._id}}" method="POST">
+            <button type="submit" class="btn btn-link"><i class="fas fa-trash-alt"></i></button> 
+            </form>
+            {{else}}
+            {{/if}} 
+            </div>
+            <small class="text-muted">{{this.date}}</small>
+            <p class="mt-2">{{this.info}}</p>
+                <div class="d-flex my-2">
+                    {{#if isLiked}}
+                      <form action="/delete/reaction/{{this._id}}" method="POST">
+                        <button type="submit" class="btn btn-link" style="margin-top: 2px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="heart-button" fill="#de6969" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                          </svg>
+                        </button>
+                      </form>
+                    
+                    {{else}} 
+                      <form action="/insert/reaction/{{this._id}}" method="POST">
+                        <button type="submit" class="btn btn-link" style="margin-top: 2px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#B8B8B8" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                        </svg>
+                        </button>
+                      </form>
+                    {{/if}}
+
+                  <small class="align-self-center">{{this.Rewards}}</small>
+
+                </div>
+              </li>
+          {{/each}}
+        </ul>
+        <form action="/createcomment/{{this._id}}" method="post" class="my-2" enctype="multipart/form-data">
+          <div class="form-group d-flex flex-row" style="width: 100%;">
+            <input type="text" class="form-control" name="content" id="comment" placeholder="Reply to commission.." required> 
+              <button type="submit" class="btn btn-secondary">Reply</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  {{/each}}
+  {{else}}
+  
+  <div class="card">
+    <h3 class="text-center text-muted card-body">Commissions board is empty</h3>
+  </div>
+  {{/if}}
+  </div>
+</div>
+  <div class="col-lg-4">
+    <div class="card bg-tertiary">
+     <div class="resume-item my-3">
+      <h2 class="text-center">Locations</h2>
+      <div class="list-group bg-tertiary">
+      <a href="/get/Mondstadt" class="list-group-item text-center" style="background-color:#f2eeea!important; font-size: 20px;">Mondstadt</a>
+      <a href="/get/Liyue" class="list-group-item text-center" style="background-color:#f2eeea!important; font-size: 20px;">Liyue</a>
+      <a href="/get/Inazuma" class="list-group-item text-center" style="background-color:#f2eeea!important; font-size: 20px;">Inazuma</a>
+      </div>
+     </div>
+     </div>
+    <div class="card bg-secondary">
+    <div class="resume-item text-white">    
+      <div class="footer-clean">
+        <div class="side-footer">
+          <ul class = "right-div">
+            <li><a href="/aboutus">About</a></li>
+            <li > <a href="#">Help</a></li>
+            <li><a href="#">Press</a></li>
+            <li ><a href="#">API</a></li>
+            <li><a href="#">Jobs</a> </li>
+          </ul>
+			    <ul class = "left-div"> 
+					  <li><a  href="#">Privacy</a></li>
+						<li><a  href="#">Terms</a></li>
+						<li><a  href="#">Locations</a></li>
+            <li ><a  href="#">Top Accounts</a></li>
+            <li><a  href="#">Hashtag</a></li>
+            <li ><a href="#">Language</a></li>
+			    </ul>
+      </div>          
+    </div>
+    </div>
+    </div>
+</div>
+  </div>
+  </div>
+</section>
+</body>
