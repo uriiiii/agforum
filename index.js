@@ -96,7 +96,7 @@ app.get('*', (req, res) => {
 	res.render('404');
 });
 
-app.listen(port, hostname, function () {
+app.listen(port, function () {
     console.log(`Server is running at:`);
     console.log(`http://localhost` `:` + port);
 });
