@@ -12,7 +12,6 @@ const db = require(`./models/db.js`);
 dotenv.config();
 port = process.env.PORT || 3000;
 url = process.env.URI;
-hostname = process.env.HOSTNAME;
 secret = process.env.SECRET;
 
 db.connect();
@@ -99,5 +98,5 @@ app.get('*', (req, res) => {
 
 app.listen(port, hostname, function () {
     console.log(`Server is running at:`);
-    console.log(`http://` + hostname + `:` + port);
+    console.log(`http://localhost` `:` + port);
 });
