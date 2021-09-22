@@ -10,7 +10,7 @@ const MongoStore = require('connect-mongo');
 const db = require(`./models/db.js`);
 
 dotenv.config();
-port = process.env.PORT;
+port = process.env.PORT || 3000;
 url = process.env.URI;
 hostname = process.env.HOSTNAME;
 secret = process.env.SECRET;
